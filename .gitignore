@@ -1,0 +1,6 @@
+.vs/
+bin/
+obj/
+input.txt
+output.txt
+Combined.csx
