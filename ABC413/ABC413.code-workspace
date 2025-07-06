@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../Library"
+		}
+	],
+	"settings": {
+		"debug.console.collapseIdenticalLines": false,
+		"debug.console.wordWrap": false,
+		"debug.toolBarLocation": "floating",
+		"files.exclude": {
+			"**/bin": true,
+			"**/obj": true
+		}
+	}
+}

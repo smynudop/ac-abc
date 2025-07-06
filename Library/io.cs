@@ -72,7 +72,7 @@ public class MyIO : IDisposable
         return Split<int>(reader.ReadLine()!, capacity);
     }
 
-    public (int Type, string Content) ReadQuery(int capacity = -1)
+    public (int Type, string Content) ReadQuery()
     {
         return SplitAs<int, string>(reader.ReadLine()!);
     }
@@ -137,6 +137,7 @@ public class MyIO : IDisposable
     }
 
     private StringBuilder builder = new StringBuilder();
+    public void Write(object s) => builder.Append(s).Append(' ');
     public void WriteLine(string s) => builder.AppendLine(s);
     public void WriteLine(object s) => builder.AppendLine(s.ToString());
     public void WriteLine(IEnumerable<int> list) => builder.AppendLine(string.Join(' ', list));

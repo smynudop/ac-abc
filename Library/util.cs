@@ -1,3 +1,5 @@
+using System.Buffers;
+
 namespace AtCoder.MyLib;
 
 public static class Util
@@ -40,5 +42,15 @@ public static class Util
             result.Add(s);
         }
         return result;
+    }
+
+    public static void Swap<T>(Span<T> s1, Span<T> s2)
+    {
+        var buffer = ArrayPool<T>.Shared.Rent(s1.Length);
+        var tmp = buffer.AsSpan().Slice(0, s1.Length);
+        s1.CopyTo(tmp);
+        s2.CopyTo(s1);
+        tmp.CopyTo(s2);
+        ArrayPool<T>.Shared.Return(buffer);
     }
 }
