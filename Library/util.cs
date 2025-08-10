@@ -31,11 +31,11 @@ public static class Util
     /// </summary>
     /// <param name="list"></param>
     /// <returns></returns>
-    public static List<int> Ruiseki(IEnumerable<int> list)
+    public static List<long> Ruiseki(IEnumerable<int> list)
     {
         var len = list.Count();
-        var result = new List<int>(len);
-        var s = 0;
+        var result = new List<long>(len);
+        long s = 0;
         foreach (var n in list)
         {
             s += n;

@@ -1,7 +1,7 @@
 namespace AtCoder.MyLib;
 
 
-public readonly struct ModInt
+public readonly record struct ModInt
 {
     public const int BASE = 998244353;
     public readonly int Value;
