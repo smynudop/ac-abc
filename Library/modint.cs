@@ -1,7 +1,7 @@
 namespace AtCoder.MyLib;
 
 
-public readonly record struct ModInt
+public readonly record struct ModInt : IComparable<ModInt>
 {
     public const int BASE = 998244353;
     public readonly int Value;
@@ -40,4 +40,9 @@ public readonly record struct ModInt
 
     public static implicit operator ModInt(int i) => new ModInt(i);
     public static implicit operator ModInt(long i) => new ModInt(i);
+
+    public int CompareTo(ModInt target)
+    {
+        return this.Value.CompareTo(target.Value);
+    }
 }
