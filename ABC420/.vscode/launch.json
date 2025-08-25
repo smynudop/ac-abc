@@ -10,7 +10,10 @@
             "request": "launch",
             "preLaunchTask": "build-A",
             "program": "${workspaceFolder}/A/bin/Debug/net7.0/A.dll",
-            "args": [],
+            "args": [
+                "input.txt",
+                "output.txt"
+            ],
             "cwd": "${workspaceFolder}/A",
             "console": "internalConsole",
             "stopAtEntry": false
@@ -21,7 +24,10 @@
             "request": "launch",
             "preLaunchTask": "build-B",
             "program": "${workspaceFolder}/B/bin/Debug/net7.0/B.dll",
-            "args": [],
+            "args": [
+                "input.txt",
+                "output.txt"
+            ],
             "cwd": "${workspaceFolder}/B",
             "console": "internalConsole",
             "stopAtEntry": false
@@ -32,7 +38,10 @@
             "request": "launch",
             "preLaunchTask": "build-C",
             "program": "${workspaceFolder}/C/bin/Debug/net7.0/C.dll",
-            "args": [],
+            "args": [
+                "input.txt",
+                "output.txt"
+            ],
             "cwd": "${workspaceFolder}/C",
             "console": "internalConsole",
             "stopAtEntry": false
@@ -43,7 +52,10 @@
             "request": "launch",
             "preLaunchTask": "build-D",
             "program": "${workspaceFolder}/D/bin/Debug/net7.0/D.dll",
-            "args": [],
+            "args": [
+                "input.txt",
+                "output.txt"
+            ],
             "cwd": "${workspaceFolder}/D",
             "console": "internalConsole",
             "stopAtEntry": false
@@ -54,7 +66,10 @@
             "request": "launch",
             "preLaunchTask": "build-E",
             "program": "${workspaceFolder}/E/bin/Debug/net7.0/E.dll",
-            "args": [],
+            "args": [
+                "input.txt",
+                "output.txt"
+            ],
             "cwd": "${workspaceFolder}/E",
             "console": "internalConsole",
             "stopAtEntry": false
@@ -79,7 +94,10 @@
             "request": "launch",
             "preLaunchTask": "build-G",
             "program": "${workspaceFolder}/G/bin/Debug/net7.0/G.dll",
-            "args": [],
+            "args": [
+                "input.txt",
+                "output.txt"
+            ],
             "cwd": "${workspaceFolder}/G",
             "console": "internalConsole",
             "stopAtEntry": false
