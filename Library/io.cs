@@ -74,9 +74,37 @@ public class MyIO : IDisposable
         return Split<int>(reader.ReadLine()!, capacity);
     }
 
+    /// <summary>
+    /// Arrayで取得
+    /// </summary>
+    /// <param name="capacity"></param>
+    /// <returns></returns>
+    public int[] ReadIntArray(int capacity)
+    {
+        return SplitArray<int>(reader.ReadLine()!, capacity);
+    }
+
+    /// <summary>
+    /// Arrayで取得
+    /// </summary>
+    /// <param name="capacity"></param>
+    /// <returns></returns>
+    public long[] ReadLongArray(int capacity)
+    {
+        return SplitArray<long>(reader.ReadLine()!, capacity);
+    }
+
     public (int Type, string Content) ReadQuery()
     {
-        return SplitAs<int, string>(reader.ReadLine()!);
+        var chars = reader.ReadLine()!.AsSpan();
+        for (var i = 0; i < chars.Length; i++)
+        {
+            if (chars[i] == ' ')
+            {
+                return (int.Parse(chars.Slice(0, i)), new string(chars.Slice(i + 1)));
+            }
+        }
+        return (int.Parse(chars), "");
     }
 
     public List<long> ReadLongList(int capacity = -1)
@@ -101,6 +129,28 @@ public class MyIO : IDisposable
         if (start < chars.Length)
         {
             result.Add(T.Parse(chars.Slice(start), null));
+        }
+        return result;
+    }
+
+    private T[] SplitArray<T>(string s, int capacity) where T : ISpanParsable<T>
+    {
+        var result = new T[capacity];
+        var chars = s.AsSpan();
+        var start = 0;
+        var index = 0;
+        for (var i = 0; i < chars.Length; i++)
+        {
+            if (chars[i] == ' ')
+            {
+                result[index++] = T.Parse(chars.Slice(start, i - start), null);
+                i++;
+                start = i;
+            }
+        }
+        if (start < chars.Length)
+        {
+            result[index++] = T.Parse(chars.Slice(start), null);
         }
         return result;
     }
