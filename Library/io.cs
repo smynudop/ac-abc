@@ -69,6 +69,24 @@ public class MyIO : IDisposable
         return (line[0], line[1], line[2]);
     }
 
+    public (long, long, long) ReadLong3()
+    {
+        var line = Split<long>(reader.ReadLine()!, 3);
+        return (line[0], line[1], line[2]);
+    }
+
+    public (int, int, int, int) ReadInt4()
+    {
+        var line = Split<int>(reader.ReadLine()!, 4);
+        return (line[0], line[1], line[2], line[3]);
+    }
+
+    public (long, long, long, long) ReadLong4()
+    {
+        var line = Split<long>(reader.ReadLine()!, 4);
+        return (line[0], line[1], line[2], line[3]);
+    }
+
     public List<int> ReadIntList(int capacity = -1)
     {
         return Split<int>(reader.ReadLine()!, capacity);
