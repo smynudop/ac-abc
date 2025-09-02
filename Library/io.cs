@@ -5,20 +5,24 @@ namespace AtCoder.MyLib;
 public class MyIO : IDisposable
 {
     private StreamReader reader;
-    private StreamWriter writer;
-    private string? correct = null;
+    private TextWriter writer;
     public MyIO(string[] args)
     {
         if (args.Length == 2)
         {
             this.reader = new StreamReader(args[0]);
-            this.correct = File.ReadAllText(args[1]);
         }
         else
         {
             this.reader = new StreamReader(Console.OpenStandardInput(), Console.InputEncoding, false, 1 << 20);
         }
         this.writer = new StreamWriter(Console.OpenStandardOutput(), Console.OutputEncoding, 1 << 20) { AutoFlush = false };
+    }
+
+    public MyIO(StreamReader reader, TextWriter writer)
+    {
+        this.reader = reader;
+        this.writer = writer;
     }
 
     public void Dispose()
@@ -28,21 +32,6 @@ public class MyIO : IDisposable
 
         reader.Dispose();
         writer.Dispose();
-
-        if (this.correct == null)
-        {
-            return;
-        }
-
-        var correctLines = correct.Split('\n').Select(x => x.Trim()).ToList();
-        var answer = builder.ToString().Split("\n").Select(x => x.Trim()).ToList();
-        for (var i = 0; i < Math.Min(answer.Count, correctLines.Count); i++)
-        {
-            if (answer[i] != correctLines[i])
-            {
-                Console.Error.WriteLine($"Error at line {i + 1}: Expected '{correct[i]}', but got '{answer[i]}'");
-            }
-        }
     }
 
     public string ReadLine() => reader.ReadLine() ?? string.Empty;
