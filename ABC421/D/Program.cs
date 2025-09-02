@@ -1,9 +1,8 @@
 ﻿using AtCoder.MyLib;
 using var io = new MyIO(args);
 SourceExpander.Expander.Expand();
-
 var (Rt, Ct, Ra, Ca) = io.ReadLong4();
-if ((Rt + Ct) % 2 != (Ra + Ca) % 2)
+if ((Math.Abs(Rt) + Math.Abs(Ct)) % 2 != (Math.Abs(Ra) + Math.Abs(Ca)) % 2)
 {
     io.WriteLine(0);
     return;
@@ -30,55 +29,46 @@ long d = 0;
 
 long move()
 {
-    long encount = 0;
     (long tdx, long tdy) = SDir switch
     {
-        "U" => (0L, -d),
-        "D" => (0L, d),
         "L" => (-d, 0L),
         "R" => (d, 0L),
+        "U" => (0L, -d),
+        "D" => (0L, d),
         _ => (0L, 0L)
     };
     (long adx, long ady) = TDir switch
     {
-        "U" => (0L, -d),
-        "D" => (0L, d),
         "L" => (-d, 0L),
         "R" => (d, 0L),
+        "U" => (0L, -d),
+        "D" => (0L, d),
         _ => (0L, 0L)
     };
-    var Rt2 = Rt + tdy;
-    var Ct2 = Ct + tdx;
-    var Ra2 = Ra + ady;
-    var Ca2 = Ca + adx;
 
-    if (SDir == TDir)
+    var TStart = new Point3D<long>(Ct, Rt, 0);
+    var TEnd = new Point3D<long>(Ct + tdx, Rt + tdy, d);
+    var AStart = new Point3D<long>(Ca, Ra, 0);
+    var AEnd = new Point3D<long>(Ca + adx, Ra + ady, d);
+
+    Ct += tdx;
+    Rt += tdy;
+    Ca += adx;
+    Ra += ady;
+
+    if (TStart == AStart && SDir == TDir)
     {
-        encount = ((Rt == Ra) && (Ct == Ca)) ? d : 0;
+        return d;
     }
-    else if ((SDir == "R" && TDir == "L") || (SDir == "L" && TDir == "R"))
+    else if (TEnd == AEnd)
     {
-        encount = (Rt == Ra) && (Ct2 == Ca2 || (Ct.CompareTo(Ca) * Ct2.CompareTo(Ca2) < 0)) ? 1 : 0;
-    }
-    else if ((SDir == "U" && TDir == "D") || (SDir == "D" && TDir == "U"))
-    {
-        encount = (Ct == Ca) && (Rt2 == Ra2 || (Rt.CompareTo(Ra) * Ct2.CompareTo(Ra2) < 0)) ? 1 : 0;
+        return 1;
     }
     else
     {
-        if (Rt + Ct == Ra + Ca || Rt - Ct == Ra + Ca)
-        {
-
-        }
+        return Geometry.IsCross(TStart, TEnd, AStart, AEnd) ? 1 : 0;
     }
 
-    Rt = Rt2;
-    Ct = Ct2;
-    Ra = Ra2;
-    Ca = Ca2;
-
-
-    return encount;
 }
 
 
