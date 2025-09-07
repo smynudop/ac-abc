@@ -19,6 +19,12 @@ public class MyIO : IDisposable
         this.writer = new StreamWriter(Console.OpenStandardOutput(), Console.OutputEncoding, 1 << 20) { AutoFlush = false };
     }
 
+    public MyIO()
+    {
+        this.reader = new StreamReader(Console.OpenStandardInput(), Console.InputEncoding, false, 1 << 20);
+        this.writer = new StreamWriter(Console.OpenStandardOutput(), Console.OutputEncoding, 1 << 20) { AutoFlush = false };
+    }
+
     public MyIO(StreamReader reader, TextWriter writer)
     {
         this.reader = reader;
@@ -51,7 +57,11 @@ public class MyIO : IDisposable
         var line = Split<long>(reader.ReadLine()!, 2);
         return (line[0], line[1]);
     }
-
+    public (Int128, Int128) ReadInt128_2()
+    {
+        var line = Split<Int128>(reader.ReadLine()!, 2);
+        return (line[0], line[1]);
+    }
     public (int, int, int) ReadInt3()
     {
         var line = Split<int>(reader.ReadLine()!, 3);
