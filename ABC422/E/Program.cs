@@ -3,55 +3,39 @@ using var io = new MyIO(args);
 SourceExpander.Expander.Expand();
 
 
-
-
-
-var (N, Q) = io.ReadInt2();
-var uf = new UnionFindBlack(N);
-for (var _ = 0; _ < Q; _++)
+var N = io.ReadInt();
+var points = new List<Point2D<int>>(N);
+for (var i = 0; i < N; i++)
 {
-    var (type, content) = io.ReadQuery();
-    if (type == 1)
-    {
-        var (u, v) = content.SplitAs<int, int>();
-        uf.Union(u, v);
-    }
-    else if (type == 2)
-    {
-        var u = content.AsInt() - 1;
-        uf.toggleBlack(u);
-    }
-    else
-    {
-        var u = content.AsInt() - 1;
-        io.WriteLine(uf.Black(u) > 0 ? "Yes" : "No");
-    }
+    var (x, y) = io.ReadInt2();
+    points.Add(new Point2D<int>(x, y));
 }
 
-class UnionFindBlack : UnionFindAbstract
+var rnd = new Random();
+for (var _ = 0; _ < 100; _++)
 {
-    private int[] black { get; init; }
-    private bool[] isBlack { get; init; }
-
-    public UnionFindBlack(int size) : base(size)
+    var i = rnd.Next(0, N);
+    var j = rnd.Next(0, N);
+    if (i == j)
     {
-        this.black = new int[size];
-        this.isBlack = new bool[size];
-    }
-    public void toggleBlack(int x)
-    {
-        isBlack[x] = !isBlack[x];
-        var xx = Find(x);
-        black[xx] += (isBlack[x] ? 1 : -1);
+        continue;
     }
 
-    protected override void OnUnion(int root, int branch)
-    {
-        black[root] += black[branch];
-    }
+    var (a, b, c) = Geometry.Line(points[i], points[j]);
 
-    public int Black(int x)
+    var cnt = 0;
+    foreach (var p in points)
     {
-        return this.black[Find(x)];
+        if (a * p.X + b * p.Y + c == 0)
+        {
+            cnt++;
+        }
+    }
+    if (cnt >= N / 2 + 1)
+    {
+        io.WriteLine("Yes");
+        io.WriteLine($"{a} {b} {c}");
+        return;
     }
 }
+io.WriteLine("No");

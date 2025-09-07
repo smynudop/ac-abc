@@ -10,8 +10,37 @@ public readonly record struct Point3D<T>(T X, T Y, T Z) where T : INumber<T>
     }
 }
 
+public readonly record struct Point2D<T>(T X, T Y) where T : INumber<T>
+{
+}
+
 public static class Geometry
 {
+    /// <summary>
+    /// 2点を通る方程式 ax + by + c = 0 の係数a,b,cを返します。
+    /// </summary>
+    /// <param name="p1"></param>
+    /// <param name="p2"></param>
+    /// <returns></returns>
+    public static (long a, long b, long c) Line(Point2D<int> p1, Point2D<int> p2)
+    {
+        long dx = (long)p2.X - p1.X;
+        long dy = (long)p2.Y - p1.Y;
+
+        // dx(y-y1) = dy(x-x1)
+        // <=> dy・x - dx・y + dx・y1 - dy・x1 = 0;
+        var a = dy;
+        var b = -dx;
+        var c = dx * p1.Y - dy * p1.X;
+
+        var gcd = GCD.gcd(Math.Abs(a), Math.Abs(b));
+        a /= gcd;
+        b /= gcd;
+        c /= gcd;
+
+        return (a, b, c);
+    }
+
     /// <summary>
     /// 2つの線分がクロスするかどうかを判定(端点が重なる場合はFalse)
     /// </summary>
