@@ -45,9 +45,9 @@ public static class StringExtension
         return int.Parse(s);
     }
 
-    public static int AsLong(this string s)
+    public static long AsLong(this string s)
     {
-        return int.Parse(s);
+        return long.Parse(s);
     }
 
     private static T ParseOrString<T>(ReadOnlySpan<char> chars)

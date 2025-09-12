@@ -14,7 +14,7 @@ public readonly record struct Point2D<T>(T X, T Y) where T : INumber<T>
 {
 }
 
-public static class Geometry
+public static partial class Geometry3D
 {
     /// <summary>
     /// 2点を通る方程式 ax + by + c = 0 の係数a,b,cを返します。
@@ -97,5 +97,19 @@ public static class Geometry
         //(b-a)・(u × v) == 0 が条件
         var ca = (C - A).As<Int128>();
         return ca.InnerProductSign(u.OuterProduct<Int128>(v)) == 0;
+    }
+
+    /// <summary>
+    /// サッポロ距離、もとい、マンハッタン距離を算出
+    /// </summary>
+    /// <param name="A"></param>
+    /// <param name="B"></param>
+    public static int SapporoDistance<T>(
+        Point3D<int> A,
+        Point3D<int> B
+    ) where T : INumber<T>
+    {
+        var C = A - B;
+        return Math.Abs(C.X) + Math.Abs(C.Y) + Math.Abs(C.Z);
     }
 }

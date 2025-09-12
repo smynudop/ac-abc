@@ -1,5 +1,5 @@
 using System.Text;
-
+using System.Runtime.CompilerServices;
 namespace AtCoder.MyLib;
 
 public class MyIO : IDisposable
@@ -25,15 +25,25 @@ public class MyIO : IDisposable
         this.writer = new StreamWriter(Console.OpenStandardOutput(), Console.OutputEncoding, 1 << 20) { AutoFlush = false };
     }
 
+    public MyIO(StreamReader reader)
+    {
+        this.reader = reader;
+        this.writer = new StreamWriter(Console.OpenStandardOutput(), Console.OutputEncoding, 1 << 20) { AutoFlush = false };
+    }
+
     public MyIO(StreamReader reader, TextWriter writer)
     {
         this.reader = reader;
         this.writer = writer;
     }
 
+    public void Flush()
+    {
+        writer.Flush();
+    }
+
     public void Dispose()
     {
-        writer.Write(builder.ToString());
         writer.Flush();
 
         reader.Dispose();
@@ -46,10 +56,10 @@ public class MyIO : IDisposable
 
     public long ReadLong() => long.Parse(reader.ReadLine() ?? "0");
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public (int, int) ReadInt2()
     {
-        var line = Split<int>(reader.ReadLine()!, 2);
-        return (line[0], line[1]);
+        return reader.ReadLine()!.SplitAs<int, int>();
     }
 
     public (long, long) ReadLong2()
@@ -177,10 +187,13 @@ public class MyIO : IDisposable
         return s.SplitAs<T1, T2>();
     }
 
-    private StringBuilder builder = new StringBuilder();
-    public void Write(object s) => builder.Append(s).Append(' ');
-    public void WriteLine(string s) => builder.AppendLine(s);
-    public void WriteLine(object s) => builder.AppendLine(s.ToString());
-    public void WriteLine(IEnumerable<int> list) => builder.AppendLine(string.Join(' ', list));
-    public void WriteLine(IEnumerable<long> list) => builder.AppendLine(string.Join(' ', list));
+    public void Write(object s)
+    {
+        writer.Write(s);
+        writer.Write(' ');
+    }
+    public void WriteLine(string s) => writer.WriteLine(s);
+    public void WriteLine(object s) => writer.WriteLine(s.ToString());
+    public void WriteLine(IEnumerable<int> list) => writer.WriteLine(string.Join(' ', list));
+    public void WriteLine(IEnumerable<long> list) => writer.WriteLine(string.Join(' ', list));
 }
