@@ -149,8 +149,7 @@ public class MyIO : IDisposable
             if (chars[i] == ' ')
             {
                 result.Add(T.Parse(chars.Slice(start, i - start), null));
-                i++;
-                start = i;
+                start = i+1;
             }
         }
         if (start < chars.Length)
@@ -171,8 +170,7 @@ public class MyIO : IDisposable
             if (chars[i] == ' ')
             {
                 result[index++] = T.Parse(chars.Slice(start, i - start), null);
-                i++;
-                start = i;
+                start = i+1;
             }
         }
         if (start < chars.Length)
@@ -180,11 +178,6 @@ public class MyIO : IDisposable
             result[index++] = T.Parse(chars.Slice(start), null);
         }
         return result;
-    }
-
-    public static (T1, T2) SplitAs<T1, T2>(string s)
-    {
-        return s.SplitAs<T1, T2>();
     }
 
     public void Write(object s)
