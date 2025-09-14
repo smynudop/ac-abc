@@ -20,7 +20,7 @@ public static class StringExtension
     public static (T1, T2, T3) SplitAs<T1, T2, T3>(this string s)
     {
         var chars = s.AsSpan();
-        int[] spaces = new int[2];
+        Span<int> spaces = stackalloc int[2];
         var j = 0;
         for (var i = 0; i < chars.Length; i++)
         {
@@ -43,7 +43,7 @@ public static class StringExtension
     public static (T1, T2, T3, T4) SplitAs<T1, T2, T3, T4>(this string s)
     {
         var chars = s.AsSpan();
-        int[] spaces = new int[3];
+        Span<int> spaces = stackalloc int[3];
         var j = 0;
         for (var i = 0; i < chars.Length; i++)
         {
