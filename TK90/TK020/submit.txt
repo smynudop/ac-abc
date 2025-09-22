@@ -1,0 +1,33 @@
+using AtCoder.MyLib;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+void myExpand(string outputFileName = "Combine.csx", [CallerFilePath] string? cfp = null) 
+{
+    var d = Path.GetDirectoryName(cfp!)!;
+    SourceExpander.Expander.Expand(outputFilePath: Path.Combine(d, outputFileName));
+}
+myExpand("submit.txt");
+
+void _main(MyIO io)
+{
+    var (a,b,c) = io.ReadLong3();
+    long x = 1;
+    while(b-- > 0)
+    {
+        x *= c;
+    }
+    io.WriteLine(a < x ? "Yes" : "No");
+}
+
+#if DEBUG
+using var io = new MyIO(new StreamReader("input.txt"));
+_main(io);
+#else
+using var io = new MyIO();
+_main(io);
+#endif
+#region Expanded by https://github.com/kzrnm/SourceExpander
+namespace AtCoder.MyLib { public static class StringExtension { public static (T1, T2) SplitAs<T1, T2>(this string s) { var chars = s.AsSpan(); for (var i = 0; i < chars.Length; i++) { if (chars[i] == ' ') { T1 val1 = ParseOrString<T1>(chars.Slice(0, i)); T2 val2 = ParseOrString<T2>(chars.Slice(i + 1)); return (val1, val2); } }  throw new Exception(); }  public static (T1, T2, T3) SplitAs<T1, T2, T3>(this string s) { var chars = s.AsSpan(); Span<int> spaces = stackalloc int[2]; var j = 0; for (var i = 0; i < chars.Length; i++) { if (chars[i] == ' ') { spaces[j++] = i; if (j == 2) break; } }  if (j == 2) { T1 v1 = ParseOrString<T1>(chars.Slice(0, spaces[0])); T2 v2 = ParseOrString<T2>(chars.Slice(spaces[0] + 1, spaces[1] - spaces[0] - 1)); T3 v3 = ParseOrString<T3>(chars.Slice(spaces[1] + 1)); return (v1, v2, v3); }  throw new Exception(); }  public static (T1, T2, T3, T4) SplitAs<T1, T2, T3, T4>(this string s) { var chars = s.AsSpan(); Span<int> spaces = stackalloc int[3]; var j = 0; for (var i = 0; i < chars.Length; i++) { if (chars[i] == ' ') { spaces[j++] = i; if (j == 3) break; } }  if (j == 3) { T1 v1 = ParseOrString<T1>(chars.Slice(0, spaces[0])); T2 v2 = ParseOrString<T2>(chars.Slice(spaces[0] + 1, spaces[1] - spaces[0] - 1)); T3 v3 = ParseOrString<T3>(chars.Slice(spaces[1] + 1, spaces[2] - spaces[1] - 1)); T4 v4 = ParseOrString<T4>(chars.Slice(spaces[2] + 1)); return (v1, v2, v3, v4); }  throw new Exception(); }  public static int AsInt(this string s) { return int.Parse(s); }  public static long AsLong(this string s) { return long.Parse(s); }  private static T ParseOrString<T>(ReadOnlySpan<char> chars) { var t = typeof(T); if (t == typeof(int)) { return (T)(object)int.Parse(chars); }  if (t == typeof(long)) { return (T)(object)long.Parse(chars); }  if (t == typeof(string)) { return (T)(object)new string (chars); }  throw new InvalidCastException(""); } } }
+namespace AtCoder.MyLib { public class MyIO : IDisposable { private TextReader reader; private TextWriter writer; public MyIO(string[] args) { if (args.Length == 2) { this.reader = new StreamReader(args[0]); } else { this.reader = new StreamReader(Console.OpenStandardInput(), Console.InputEncoding, false, 1 << 20); }  this.writer = new StreamWriter(Console.OpenStandardOutput(), Console.OutputEncoding, 1 << 20) { AutoFlush = false }; }  public MyIO() { this.reader = new StreamReader(Console.OpenStandardInput(), Console.InputEncoding, false, 1 << 20); this.writer = new StreamWriter(Console.OpenStandardOutput(), Console.OutputEncoding, 1 << 20) { AutoFlush = false }; }  public MyIO(TextReader reader) { this.reader = reader; this.writer = new StreamWriter(Console.OpenStandardOutput(), Console.OutputEncoding, 1 << 20) { AutoFlush = false }; }  public MyIO(TextReader reader, TextWriter writer) { this.reader = reader; this.writer = writer; }  public void Flush() { writer.Flush(); }  public void Dispose() { writer.Flush(); reader.Dispose(); writer.Dispose(); }  public string ReadLine() => reader.ReadLine() ?? string.Empty; public int ReadInt() => int.Parse(reader.ReadLine() ?? "0"); public long ReadLong() => long.Parse(reader.ReadLine() ?? "0"); [MethodImpl(MethodImplOptions.AggressiveInlining)] public (int, int) ReadInt2() { return reader.ReadLine()!.SplitAs<int, int>(); }  public (long, long) ReadLong2() { return reader.ReadLine()!.SplitAs<long, long>(); }  public (Int128, Int128) ReadInt128_2() { return reader.ReadLine()!.SplitAs<Int128, Int128>(); }  public (int, int, int) ReadInt3() { return reader.ReadLine()!.SplitAs<int, int, int>(); }  public (long, long, long) ReadLong3() { return reader.ReadLine()!.SplitAs<long, long, long>(); }  public (int, int, int, int) ReadInt4() { return reader.ReadLine()!.SplitAs<int, int, int, int>(); }  public (long, long, long, long) ReadLong4() { return reader.ReadLine()!.SplitAs<long, long, long, long>(); }  public List<int> ReadIntList(int capacity = -1) { return Split<int>(reader.ReadLine()!, capacity); }  public int[] ReadIntArray(int capacity) { return SplitArray<int>(reader.ReadLine()!, capacity); }  public long[] ReadLongArray(int capacity) { return SplitArray<long>(reader.ReadLine()!, capacity); }  public (int Type, string Content) ReadQuery() { return reader.ReadLine()!.SplitAs<int, string>(); }  public (TQuery Type, string Content) ReadQuery<TQuery>() { return reader.ReadLine()!.SplitAs<TQuery, string>(); }  public List<long> ReadLongList(int capacity = -1) { return Split<long>(reader.ReadLine()!, capacity); }  private List<T> Split<T>(string s, int capacity = -1) where T : ISpanParsable<T> { var result = capacity >= 0 ? new List<T>(capacity) : new List<T>(); var chars = s.AsSpan(); var start = 0; for (var i = 0; i < chars.Length; i++) { if (chars[i] == ' ') { result.Add(T.Parse(chars.Slice(start, i - start), null)); start = i + 1; } }  if (start < chars.Length) { result.Add(T.Parse(chars.Slice(start), null)); }  return result; }  private T[] SplitArray<T>(string s, int capacity) where T : ISpanParsable<T> { var result = new T[capacity]; var chars = s.AsSpan(); var start = 0; var index = 0; for (var i = 0; i < chars.Length; i++) { if (chars[i] == ' ') { result[index++] = T.Parse(chars.Slice(start, i - start), null); start = i + 1; } }  if (start < chars.Length) { result[index++] = T.Parse(chars.Slice(start), null); }  return result; }  public void Write(object s) { writer.Write(s); writer.Write(' '); }  public void WriteLine(string s) => writer.WriteLine(s); public void WriteLine(object s) => writer.WriteLine(s.ToString()); public void WriteLine(IEnumerable<int> list) => writer.WriteLine(string.Join(' ', list)); public void WriteLine(IEnumerable<long> list) => writer.WriteLine(string.Join(' ', list)); } }
+namespace SourceExpander{public class Expander{[Conditional("EXP")]public static void Expand(string inputFilePath=null,string outputFilePath=null,bool ignoreAnyError=true){}public static string ExpandString(string inputFilePath=null,bool ignoreAnyError=true){return "";}}}
+#endregion Expanded by https://github.com/kzrnm/SourceExpander

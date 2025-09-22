@@ -34,6 +34,36 @@ public static class GCD
     }
 
     /// <summary>
+    /// 最小公倍数を求めます。桁溢れした場合は-1を返します。
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns></returns>
+    public static long lcm(long a, long b)
+    {
+        var _gcd = gcd(a,b);
+        var _lcm = a / _gcd * b;
+        return _lcm < 0 ? -1 : _lcm;
+    }
+
+    /// <summary>
+    /// 最小公倍数を求めます。桁溢れした場合はoverflowの値を返します。
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns></returns>
+    public static long lcm_checked(long a, long b, long overflow)
+    {
+        long _gcd = gcd(a, b);
+        long x = a/ _gcd;
+        if(b != 0 && x > overflow / b)
+        {
+            return overflow;
+        }
+        return x * b;
+    }
+
+    /// <summary>
     /// ax + by = c なるx, yの1つを返します
     /// </summary>
     /// <param name="a"></param>

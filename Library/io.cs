@@ -4,7 +4,7 @@ namespace AtCoder.MyLib;
 
 public class MyIO : IDisposable
 {
-    private StreamReader reader;
+    private TextReader reader;
     private TextWriter writer;
     public MyIO(string[] args)
     {
@@ -25,13 +25,13 @@ public class MyIO : IDisposable
         this.writer = new StreamWriter(Console.OpenStandardOutput(), Console.OutputEncoding, 1 << 20) { AutoFlush = false };
     }
 
-    public MyIO(StreamReader reader)
+    public MyIO(TextReader reader)
     {
         this.reader = reader;
         this.writer = new StreamWriter(Console.OpenStandardOutput(), Console.OutputEncoding, 1 << 20) { AutoFlush = false };
     }
 
-    public MyIO(StreamReader reader, TextWriter writer)
+    public MyIO(TextReader reader, TextWriter writer)
     {
         this.reader = reader;
         this.writer = writer;
@@ -64,36 +64,32 @@ public class MyIO : IDisposable
 
     public (long, long) ReadLong2()
     {
-        var line = Split<long>(reader.ReadLine()!, 2);
-        return (line[0], line[1]);
+        return reader.ReadLine()!.SplitAs<long, long>();
     }
+
     public (Int128, Int128) ReadInt128_2()
     {
-        var line = Split<Int128>(reader.ReadLine()!, 2);
-        return (line[0], line[1]);
+        return reader.ReadLine()!.SplitAs<Int128, Int128>();
     }
+
     public (int, int, int) ReadInt3()
     {
-        var line = Split<int>(reader.ReadLine()!, 3);
-        return (line[0], line[1], line[2]);
+        return reader.ReadLine()!.SplitAs<int, int, int>();
     }
 
     public (long, long, long) ReadLong3()
     {
-        var line = Split<long>(reader.ReadLine()!, 3);
-        return (line[0], line[1], line[2]);
+        return reader.ReadLine()!.SplitAs<long, long, long>();
     }
 
     public (int, int, int, int) ReadInt4()
     {
-        var line = Split<int>(reader.ReadLine()!, 4);
-        return (line[0], line[1], line[2], line[3]);
+        return reader.ReadLine()!.SplitAs<int, int, int, int>();
     }
 
     public (long, long, long, long) ReadLong4()
     {
-        var line = Split<long>(reader.ReadLine()!, 4);
-        return (line[0], line[1], line[2], line[3]);
+        return reader.ReadLine()!.SplitAs<long, long, long, long>();
     }
 
     public List<int> ReadIntList(int capacity = -1)
@@ -123,15 +119,12 @@ public class MyIO : IDisposable
 
     public (int Type, string Content) ReadQuery()
     {
-        var chars = reader.ReadLine()!.AsSpan();
-        for (var i = 0; i < chars.Length; i++)
-        {
-            if (chars[i] == ' ')
-            {
-                return (int.Parse(chars.Slice(0, i)), new string(chars.Slice(i + 1)));
-            }
-        }
-        return (int.Parse(chars), "");
+        return reader.ReadLine()!.SplitAs<int, string>();
+    }
+
+    public (TQuery Type, string Content) ReadQuery<TQuery>()
+    {
+        return reader.ReadLine()!.SplitAs<TQuery, string>();
     }
 
     public List<long> ReadLongList(int capacity = -1)
@@ -149,7 +142,7 @@ public class MyIO : IDisposable
             if (chars[i] == ' ')
             {
                 result.Add(T.Parse(chars.Slice(start, i - start), null));
-                start = i+1;
+                start = i + 1;
             }
         }
         if (start < chars.Length)
@@ -170,7 +163,7 @@ public class MyIO : IDisposable
             if (chars[i] == ' ')
             {
                 result[index++] = T.Parse(chars.Slice(start, i - start), null);
-                start = i+1;
+                start = i + 1;
             }
         }
         if (start < chars.Length)

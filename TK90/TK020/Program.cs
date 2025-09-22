@@ -1,5 +1,11 @@
 ﻿using AtCoder.MyLib;
-SourceExpander.Expander.Expand();
+using System.Runtime.CompilerServices;
+void myExpand(string outputFileName = "Combine.csx", [CallerFilePath] string? cfp = null) 
+{
+    var d = Path.GetDirectoryName(cfp!)!;
+    SourceExpander.Expander.Expand(outputFilePath: Path.Combine(d, outputFileName));
+}
+myExpand("submit.txt");
 
 void _main(MyIO io)
 {
