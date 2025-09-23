@@ -8,16 +8,16 @@ public static class MyDebugger
     {
         var sample = System.IO.File.ReadAllText("input.txt");
         var chunks = sample.Split("---").Select(x => x.Trim()).ToList();
-        if(chunks.Count == 0)
+        if (chunks.Count == 0)
         {
-            Console.WriteLine("“ü—Í‚ª‚ ‚è‚Ü‚¹‚ñBinput.txt‚ğİ’è‚µ‚Ä‚­‚¾‚³‚¢");
+            Console.WriteLine("ï¿½ï¿½ï¿½Í‚ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½Binput.txtï¿½ï¿½İ’è‚µï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
             return;
         }
 
-        if (chunks.Count % 2 == 1)
-        {
-            chunks.Add("");
-        }
+        // if (chunks.Count % 2 == 1)
+        // {
+        //     chunks.Add("");
+        // }
 
         for (var i = 0; i < chunks.Count / 2; i++)
         {

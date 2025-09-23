@@ -57,80 +57,42 @@ public class MyIO : IDisposable
     public long ReadLong() => long.Parse(reader.ReadLine() ?? "0");
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public (int, int) ReadInt2()
-    {
-        return reader.ReadLine()!.SplitAs<int, int>();
-    }
+    public (int, int) ReadInt2() => reader.ReadLine()!.SplitAs<int, int>();
 
-    public (long, long) ReadLong2()
-    {
-        return reader.ReadLine()!.SplitAs<long, long>();
-    }
+    public (long, long) ReadLong2() => reader.ReadLine()!.SplitAs<long, long>();
 
-    public (Int128, Int128) ReadInt128_2()
-    {
-        return reader.ReadLine()!.SplitAs<Int128, Int128>();
-    }
+    public (Int128, Int128) ReadInt128_2() => reader.ReadLine()!.SplitAs<Int128, Int128>();
 
-    public (int, int, int) ReadInt3()
-    {
-        return reader.ReadLine()!.SplitAs<int, int, int>();
-    }
+    public (int, int, int) ReadInt3() => reader.ReadLine()!.SplitAs<int, int, int>();
 
-    public (long, long, long) ReadLong3()
-    {
-        return reader.ReadLine()!.SplitAs<long, long, long>();
-    }
+    public (long, long, long) ReadLong3() => reader.ReadLine()!.SplitAs<long, long, long>();
 
-    public (int, int, int, int) ReadInt4()
-    {
-        return reader.ReadLine()!.SplitAs<int, int, int, int>();
-    }
+    public (int, int, int, int) ReadInt4() => reader.ReadLine()!.SplitAs<int, int, int, int>();
 
-    public (long, long, long, long) ReadLong4()
-    {
-        return reader.ReadLine()!.SplitAs<long, long, long, long>();
-    }
+    public (long, long, long, long) ReadLong4() => reader.ReadLine()!.SplitAs<long, long, long, long>();
 
-    public List<int> ReadIntList(int capacity = -1)
-    {
-        return Split<int>(reader.ReadLine()!, capacity);
-    }
+
+    public List<int> ReadIntList(int capacity = -1) => Split<int>(reader.ReadLine()!, capacity);
+    public List<long> ReadLongList(int capacity = -1) => Split<long>(reader.ReadLine()!, capacity);
 
     /// <summary>
     /// Arrayで取得
     /// </summary>
     /// <param name="capacity"></param>
     /// <returns></returns>
-    public int[] ReadIntArray(int capacity)
-    {
-        return SplitArray<int>(reader.ReadLine()!, capacity);
-    }
+    public int[] ReadIntArray(int capacity) => SplitArray<int>(reader.ReadLine()!, capacity);
 
     /// <summary>
     /// Arrayで取得
     /// </summary>
     /// <param name="capacity"></param>
     /// <returns></returns>
-    public long[] ReadLongArray(int capacity)
-    {
-        return SplitArray<long>(reader.ReadLine()!, capacity);
-    }
+    public long[] ReadLongArray(int capacity) => SplitArray<long>(reader.ReadLine()!, capacity);
 
-    public (int Type, string Content) ReadQuery()
-    {
-        return reader.ReadLine()!.SplitAs<int, string>();
-    }
+    public (int Type, string Content) ReadQuery() => reader.ReadLine()!.SplitAs<int, string>();
 
-    public (TQuery Type, string Content) ReadQuery<TQuery>()
-    {
-        return reader.ReadLine()!.SplitAs<TQuery, string>();
-    }
+    public (TQuery Type, string Content) ReadQuery<TQuery>() => reader.ReadLine()!.SplitAs<TQuery, string>();
 
-    public List<long> ReadLongList(int capacity = -1)
-    {
-        return Split<long>(reader.ReadLine()!, capacity);
-    }
 
     private List<T> Split<T>(string s, int capacity = -1) where T : ISpanParsable<T>
     {
@@ -171,12 +133,6 @@ public class MyIO : IDisposable
             result[index++] = T.Parse(chars.Slice(start), null);
         }
         return result;
-    }
-
-    public void Write(object s)
-    {
-        writer.Write(s);
-        writer.Write(' ');
     }
     public void WriteLine(string s) => writer.WriteLine(s);
     public void WriteLine(object s) => writer.WriteLine(s.ToString());
