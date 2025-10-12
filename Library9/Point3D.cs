@@ -12,10 +12,6 @@ public readonly record struct Point3D<T>(T X, T Y, T Z) where T : INumber<T>
 
 public readonly record struct Point2D<T>(T X, T Y) where T : INumber<T>
 {
-    public static Vec2D<T> operator -(Point2D<T> left, Point2D<T> right)
-    {
-        return Vec2D<T>.FromPoints(right, left);
-    }
 }
 
 public static partial class Geometry3D

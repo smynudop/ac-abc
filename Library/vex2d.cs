@@ -1,56 +1,48 @@
+using System.Numerics;
+
 namespace AtCoder.MyLib;
 
 
-public readonly record struct Vec2D
+public readonly record struct Vec2D<T>(T X, T Y) where T : INumber<T>
 {
-    public int X { get; }
-    public int Y { get; }
-
-    public Vec2D(int x, int y)
+    public static Vec2D<T> FromPoints(Point2D<T> start, Point2D<T> end)
     {
-        this.X = x;
-        this.Y = y;
+        return new Vec2D<T>(end.X - start.X, end.Y - start.Y);
     }
 
-    public Vec2D((int x, int y) t)
+    public Vec2D<TResult> As<TResult>() where TResult : INumber<TResult>
     {
-        this.X = t.x;
-        this.Y = t.y;
+        return new Vec2D<TResult>(
+            TResult.CreateChecked(this.X),
+            TResult.CreateChecked(this.Y)
+        );
     }
 
-    public static Vec2D FromPoints((int x, int y) a, (int x, int y) b)
+    public double Norm()
     {
-        return new Vec2D(b.x - a.x, b.y - a.y);
+        var dx = double.CreateChecked(X);
+        var dy = double.CreateChecked(Y);
+        return Math.Sqrt(dx * dx + dy * dy);
     }
 
-    public Vec2D NormalizeGcd()
+    /// <summary>
+    /// 2つのベクトルの内積を計算します。
+    /// </summary>
+    /// <param name="v"></param>
+    /// <returns></returns>
+    public T InnerProduct(Vec2D<T> v)
     {
-        if (X == 0)
-        {
-            return new Vec2D(0, 1);
-        }
-        if (Y == 0)
-        {
-            return new Vec2D(1, 0);
-        }
-        var g = gcd(X, Y);
-        var sign = Math.Sign(X);
-        return new Vec2D(X * sign / g, Y * sign / g);
+        return this.X * v.X
+            + this.Y * v.Y;
     }
 
-    private static int gcd(int x, int y)
+    public static Vec2D<T> operator -(Vec2D<T> left, Vec2D<T> right)
     {
-        int core(int x, int y)
-        {
-            if (y == 0) return x;
-            return core(x % y, y);
-        }
-
-        var xx = Math.Abs(x);
-        var yy = Math.Abs(y);
-        return xx > yy ? core(xx, yy) : core(yy, xx);
+        return new Vec2D<T>(left.X - right.X, left.Y - right.Y);
     }
 
-
-
+    public static Vec2D<T> operator /(Vec2D<T> left, T right)
+    {
+        return new Vec2D<T>(left.X / right, left.Y - right);
+    }
 }

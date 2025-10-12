@@ -1,0 +1,88 @@
+{
+    // IntelliSense を使用して利用可能な属性を学べます。
+    // 既存の属性の説明をホバーして表示します。
+    // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug A",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-A",
+            "program": "${workspaceFolder}/A/bin/Debug/net7.0/A.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/A",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Debug B",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-B",
+            "program": "${workspaceFolder}/B/bin/Debug/net7.0/B.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/B",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Debug C",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-C",
+            "program": "${workspaceFolder}/C/bin/Debug/net7.0/C.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/C",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Debug D",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-D",
+            "program": "${workspaceFolder}/D/bin/Debug/net7.0/D.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/D",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Debug E",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-E",
+            "program": "${workspaceFolder}/E/bin/Debug/net7.0/E.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/E",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Debug F",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-F",
+            "program": "${workspaceFolder}/F/bin/Debug/net7.0/F.dll",
+            "args": [
+                "input.txt",
+                "output.txt"
+            ],
+            "cwd": "${workspaceFolder}/F",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Debug G",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-G",
+            "program": "${workspaceFolder}/G/bin/Debug/net7.0/G.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/G",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        }
+    ]
+}
